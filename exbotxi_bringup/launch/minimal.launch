@@ -1,13 +1,12 @@
 <!-- 
-  This file is based on turtlebot packages, and we do some modifications.
+  This file is based on turtlebot packages, and we do some modifications, thanks to them!
   Author: Yuanbo She yuanboshe@126.com
   Group: ExBot http://blog.exbot.net
 -->
 <launch>
   <arg name="base"       default="create"/>
-  <arg name="battery"    default="$(optenv TURTLEBOT_BATTERY /sys/class/power_supply/BAT0)"/>  <!-- /proc/acpi/battery/BAT0 in 2.6 or earlier kernels-->
   <arg name="stacks"     default="circles"/>
-  <arg name="3d_sensor"  default="asus_xtion_pro"/>
+  <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR asus_xtion_pro)"/>  <!-- kinect, asus_xtion_pro -->
   <arg name="simulation" default="$(optenv TURTLEBOT_SIMULATION false)"/>
 
   <param name="/use_sim_time" value="$(arg simulation)"/>
@@ -21,6 +20,6 @@
     <arg name="base" value="$(arg base)" />
   </include>
   <include file="$(find turtlebot_bringup)/launch/includes/netbook.launch.xml">
-    <arg name="battery" value="$(arg battery)" />
+    <arg name="battery" value="/sys/class/power_supply/BAT0" />
   </include>
 </launch>

@@ -3,8 +3,10 @@ exbot_xi
 ExBot: http://blog.exbot.net  
 Email: ex_bot@126.com  
 
-Author: Yuanbo She yuanboshe@126.com
-Group: ExBot http://blog.exbot.net
+Mainly based on turtlebot and rbx1 packages, thanks to them!
+
+Author: Yuanbo She yuanboshe@126.com  
+Group: ExBot http://blog.exbot.net  
 
 Software License Agreement (BSD License)
 
