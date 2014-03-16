@@ -33,22 +33,29 @@
 import rospy
 from geometry_msgs.msg import Twist
 
-def control():
-    topic = "/cmd_vel_mux/input/teleop" # 发布的topic名，如果使用仿真机器人请改为"/cmd_vel"
-    rospy.init_node('exbotxi_example_control')
-    cmdVelPub = rospy.Publisher(topic, Twist)
-    
-    rospy.loginfo("exbot_example_control python start...")
-    speed = Twist()
-    while not rospy.is_shutdown():
-        speed.linear.x = 0.2; # 设置线速度为0.2m/s，正为前进，负为后退
-        speed.angular.z = 0.5; # 设置角速度为0.5rad/s，正为左转，负为右转
-        cmdVelPub.publish(speed) # 将刚才设置的指令发送给机器人
+class Move():
+    def __init__(self):
+        topic = "/mobile_base/commands/velocity"
+        rospy.init_node('exbotxi_example_move')
+        rospy.on_shutdown(self.shutdown)
+        self.cmdVelPub = rospy.Publisher(topic, Twist)
         
-        rospy.sleep(0.1)
+        rospy.loginfo("exbot_example_move python start...")
+        speed = Twist()
+        while not rospy.is_shutdown():
+            speed.linear.x = 0.1 # 设置线速度为0.1m/s，正为前进，负为后退
+            speed.angular.z = 0.4 # 设置角速度为0.4rad/s，正为左转，负为右转
+            self.cmdVelPub.publish(speed) # 将刚才设置的指令发送给机器人
+
+            rospy.sleep(0.1)
+
+    def shutdown(self):
+        rospy.loginfo("exbot_example_move python ended!")
+        self.cmdVelPub.publish(Twist())
+        rospy.sleep(1)
 
 if __name__ == '__main__':
     try:
-        control()
+        Move()
     except rospy.ROSInterruptException:
         pass

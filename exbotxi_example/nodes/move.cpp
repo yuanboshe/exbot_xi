@@ -30,22 +30,33 @@
  */
 
 #include <ros/ros.h>
+#include <signal.h>
 #include <geometry_msgs/Twist.h>
+
+ros::Publisher cmdVelPub;
+
+void shutdown (int sig)
+{
+  cmdVelPub.publish(geometry_msgs::Twist());
+  ROS_INFO("exbot_example_move cpp ended!");
+  ros::shutdown();
+}
 
 int main(int argc, char **argv)
 {
-  std::string topic = "/cmd_vel_mux/input/teleop"; // 发布的topic名，如果使用仿真机器人请改为"/cmd_vel"
-  ros::init(argc, argv, "exbotxi_example_control");
+  ros::init(argc, argv, "exbotxi_example_move");
+  std::string topic = "/mobile_base/commands/velocity";
   ros::NodeHandle node;
-  ros::Publisher cmdVelPub = node.advertise<geometry_msgs::Twist>(topic, 1);
-  ros::Rate loopRate(10);
+  cmdVelPub = node.advertise<geometry_msgs::Twist> (topic, 1);
+  ros::Rate loopRate (10);
+  signal (SIGINT, shutdown);
+  ROS_INFO("exbot_example_move cpp start...");
 
-  ROS_INFO("exbot_example_control cpp start...");
   geometry_msgs::Twist speed; // 控制信号载体 Twist message
   while (ros::ok())
   {
-    speed.linear.x = 0.2; // 设置线速度为0.2m/s，正为前进，负为后退
-    speed.angular.z = 0.5; // 设置角速度为0.5rad/s，正为左转，负为右转
+    speed.linear.x = 0.1; // 设置线速度为0.1m/s，正为前进，负为后退
+    speed.angular.z = 0.4; // 设置角速度为0.4rad/s，正为左转，负为右转
     cmdVelPub.publish(speed); // 将刚才设置的指令发送给机器人
 
     loopRate.sleep();
