@@ -43,9 +43,9 @@ class Move():
         rospy.loginfo("exbot_example_move python start...")
         speed = Twist()
         while not rospy.is_shutdown():
-            speed.linear.x = 0.1 # 设置线速度为0.1m/s，正为前进，负为后退
-            speed.angular.z = 0.4 # 设置角速度为0.4rad/s，正为左转，负为右转
-            self.cmdVelPub.publish(speed) # 将刚才设置的指令发送给机器人
+            speed.linear.x = 0.1  # 设置线速度为0.1m/s，正为前进，负为后退
+            speed.angular.z = 0.4  # 设置角速度为0.4rad/s，正为左转，负为右转
+            self.cmdVelPub.publish(speed)  # 将刚才设置的指令发送给机器人
 
             rospy.sleep(0.1)
 

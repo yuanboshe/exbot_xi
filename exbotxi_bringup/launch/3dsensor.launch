@@ -1,8 +1,3 @@
-<!-- 
-  This file is based on turtlebot packages, and we do some modifications, thanks to them!
-  Author: Yuanbo She yuanboshe@126.com
-  Group: ExBot http://blog.exbot.net
--->
 <launch>
   <!-- "camera" should uniquely identify the device. All topics are pushed down
        into the "camera" namespace, and it is prepended to tf frame ids. -->

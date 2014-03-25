@@ -1,0 +1,3 @@
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/sim.rviz" required="true" />
+</launch>

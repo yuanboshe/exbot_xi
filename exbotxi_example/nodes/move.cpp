@@ -35,7 +35,7 @@
 
 ros::Publisher cmdVelPub;
 
-void shutdown (int sig)
+void shutdown(int sig)
 {
   cmdVelPub.publish(geometry_msgs::Twist());
   ROS_INFO("exbot_example_move cpp ended!");
@@ -47,9 +47,9 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "exbotxi_example_move");
   std::string topic = "/mobile_base/commands/velocity";
   ros::NodeHandle node;
-  cmdVelPub = node.advertise<geometry_msgs::Twist> (topic, 1);
-  ros::Rate loopRate (10);
-  signal (SIGINT, shutdown);
+  cmdVelPub = node.advertise<geometry_msgs::Twist>(topic, 1);
+  ros::Rate loopRate(10);
+  signal(SIGINT, shutdown);
   ROS_INFO("exbot_example_move cpp start...");
 
   geometry_msgs::Twist speed; // 控制信号载体 Twist message

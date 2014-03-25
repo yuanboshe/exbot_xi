@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<robot name="xtion_pro"
+  xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:property name="PI" value="3.14159"/>
+  
+  <joint name="camera_base" type="fixed">
+    <origin xyz="0 0 0.02" rpy="0 0 0"/>
+    <parent link="200bar"/>
+    <child link="camera_base" />
+  </joint>
+  
+  <link name="camera_base">
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://exbotxi_description/meshes/xtion_pro_live.STL" />
+      </geometry>
+      <material name="black">
+        <color rgba="0.1 0.1 0.1 1" />
+      </material>
+    </visual>
+    
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0" />
+      <geometry>
+        <mesh filename="package://exbotxi_description/meshes/xtion_pro_live.STL" />
+      </geometry>
+    </collision>
+  </link>
+  
+  <joint name="camera_link_joint" type="fixed">
+    <origin xyz="0 0 0.035" rpy="0 0 0"/>
+    <parent link="camera_base"/>
+    <child link="camera_link" />
+  </joint>
+  
+  <link name="camera_link" />
+  
+  <joint name="camera_rgb_joint" type="fixed">
+    <origin xyz="0.008 0.0185 0" rpy="0 0 0"/>
+    <parent link="camera_link"/>
+    <child link="camera_rgb_frame" />
+  </joint>
+  
+  <link name="camera_rgb_frame" />
+  
+  <joint name="camera_rgb_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="${-PI/2} 0 ${-PI/2}" />
+    <parent link="camera_rgb_frame" />
+    <child link="camera_rgb_optical_frame" />
+  </joint>
+  
+  <link name="camera_rgb_optical_frame" />
+  
+  <joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0.008 0.0445 0" rpy="0 0 0" />
+    <parent link="camera_link" />
+    <child link="camera_depth_frame" />
+  </joint>
+  
+  <link name="camera_depth_frame" />
+  
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="${-PI/2} 0 ${-PI/2}" />
+    <parent link="camera_depth_frame" />
+    <child link="camera_depth_optical_frame" />
+  </joint>
+  
+  <link name="camera_depth_optical_frame" />
+</robot>
