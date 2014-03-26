@@ -3,7 +3,7 @@ exbot_xi
 ExBot: http://blog.exbot.net  
 Email: ex_bot@126.com  
 
-Mainly based on turtlebot and rbx1 packages, thanks to them!
+Mainly reference turtlebot and rbx1 packages, thanks to their contributions for ROS!
 
 Author: Yuanbo She yuanboshe@126.com  
 Group: ExBot http://blog.exbot.net  

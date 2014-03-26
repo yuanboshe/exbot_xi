@@ -3,6 +3,6 @@
   <param name="robot_description" command="$(arg urdf_file)" />
   <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/sim_static.rviz" required="true" />
-  <node pkg="tf" type="static_transform_publisher" name="base_footprint_odom" args="0 0 0 0 0 0 /odom /base_footprint 100" />
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/model.rviz" required="true" />
+  <!--<node pkg="tf" type="static_transform_publisher" name="base_footprint_odom" args="0 0 0 0 0 0 /odom /base_footprint 100" /-->
 </launch>
