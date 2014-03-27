@@ -1,11 +1,5 @@
 <launch>
-  <arg name="base"       default="create"/>
-  <arg name="stacks"     default="circles"/>
-  <arg name="3d_sensor"  default="$(optenv TURTLEBOT_3D_SENSOR asus_xtion_pro)"/>
-  <!-- kinect, asus_xtion_pro -->
-  <arg name="simulation" default="$(optenv TURTLEBOT_SIMULATION false)"/>
-  
-  <param name="/use_sim_time" value="$(arg simulation)"/>
+  <param name="/use_sim_time" value="false"/>
   
   <!-- exbotxi_description -->
   <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find exbotxi_description)/urdf/exbotxi.urdf.xacro'" />
