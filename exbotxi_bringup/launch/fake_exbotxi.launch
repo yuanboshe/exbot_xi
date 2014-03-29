@@ -6,10 +6,13 @@
     <rosparam command="delete" param="/arbotix" />
     <rosparam file="$(find exbotxi_bringup)/config/fake_irobot_create_arbotix.yaml" command="load" />
     <param name="sim" value="true"/>
-    <remap from="/cmd_vel" to="/mobile_base/commands/velocity"/>
+    <remap from="cmd_vel" to="mobile_base/commands/velocity"/>
   </node>
   
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
     <param name="publish_frequency" type="double" value="8.0" />
   </node>
+  
+  <node pkg="topic_tools" type="mux" name="exbotxi_mux1" args="mobile_base/commands/velocity cmd_vel_mux/input/teleop" />
+  <node pkg="topic_tools" type="mux" name="exbotxi_mux2" args="mobile_base/commands/velocity cmd_vel" />
 </launch>

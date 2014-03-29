@@ -24,7 +24,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: DepthCloud
+    SyncSource: ""
 Visualization Manager:
   Class: ""
   Displays:
@@ -127,6 +127,16 @@ Visualization Manager:
       Update Interval: 0
       Value: true
       Visual Enabled: true
+    - Angle Tolerance: 0.1
+      Class: rviz/Odometry
+      Color: 170; 170; 0
+      Enabled: false
+      Keep: 100
+      Length: 0.7
+      Name: Odometry
+      Position Tolerance: 0.1
+      Topic: /odom
+      Value: false
     - Class: rviz/TF
       Enabled: false
       Frame Timeout: 15

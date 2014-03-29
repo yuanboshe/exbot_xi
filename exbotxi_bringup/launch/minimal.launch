@@ -33,10 +33,7 @@
     <param name="output_frame" value="odom"/>
   </node>
   
-  <!-- velocity commands multiplexer -->
-  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
-  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
-    <param name="yaml_cfg_file" value="$(find turtlebot_bringup)/param/mux.yaml"/>
-    <remap from="cmd_vel_mux/output" to="mobile_base/commands/velocity"/>
-  </node>
+  <!-- exbotxi mux for many input -->
+  <node pkg="topic_tools" type="mux" name="exbotxi_mux1" args="mobile_base/commands/velocity cmd_vel_mux/input/teleop" />
+  <node pkg="topic_tools" type="mux" name="exbotxi_mux2" args="mobile_base/commands/velocity cmd_vel" />
 </launch>

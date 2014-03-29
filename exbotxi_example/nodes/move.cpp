@@ -45,7 +45,7 @@ void shutdown(int sig)
 int main(int argc, char **argv)
 {
   ros::init(argc, argv, "exbotxi_example_move");
-  std::string topic = "/mobile_base/commands/velocity";
+  std::string topic = "cmd_vel";
   ros::NodeHandle node;
   cmdVelPub = node.advertise<geometry_msgs::Twist>(topic, 1);
   ros::Rate loopRate(10);
