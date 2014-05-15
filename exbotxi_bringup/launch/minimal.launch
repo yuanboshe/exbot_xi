@@ -1,13 +1,13 @@
 <launch>
   <param name="/use_sim_time" value="false"/>
-  
+
   <!-- exbotxi_description -->
   <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find exbotxi_description)/urdf/exbotxi.urdf.xacro'" />
   <param name="robot_description" command="$(arg urdf_file)" />
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
     <param name="publish_frequency" type="double" value="8.0" />
   </node>
-  
+
   <!-- irobot create driver -->
   <node pkg="create_node" type="turtlebot_node.py" name="turtlebot_node" respawn="true" args="--respawnable">
     <param name="bonus" value="false" />
@@ -19,7 +19,7 @@
     <remap from="imu/data" to="mobile_base/sensors/imu_data" />
     <remap from="imu/raw" to="mobile_base/sensors/imu_data_raw" />
   </node>
-  
+
   <!-- The odometry estimator -->
   <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
     <remap from="imu_data" to="mobile_base/sensors/imu_data"/>
@@ -32,7 +32,7 @@
     <param name="vo_used" value="false"/>
     <param name="output_frame" value="odom"/>
   </node>
-  
+
   <!-- exbotxi mux for many input -->
   <node pkg="topic_tools" type="mux" name="exbotxi_mux1" args="mobile_base/commands/velocity cmd_vel_mux/input/teleop" />
   <node pkg="topic_tools" type="mux" name="exbotxi_mux2" args="mobile_base/commands/velocity cmd_vel" />

@@ -1,22 +1,16 @@
 <launch>
+  <!-- global param -->
+  <arg name="rgbd_camear"  default="$(optenv RGBD_CAMERA xtion_pro)"/> <!-- xtion_pro, kinect -->
+
   <!-- params -->
   <arg name="camera" default="camera"/>
   <arg name="scan_processing" default="true"/>
   <arg name="scan_topic" default="scan"/>
-  
-  <include file="$(find openni2_launch)/launch/openni2.launch">
+
+  <include file="$(find exbotxi_bringup)/launch/include/$(arg rgbd_camear)_rgbd_camera.launch.xml">
     <arg name="camera" value="$(arg camera)"/>
-    <arg name="publish_tf" value="false"/>
-    <arg name="depth_registration" value="true"/>
-    <arg name="num_worker_threads" value="4" />
-    <arg name="rgb_processing" value="true"/>
-    <arg name="ir_processing" value="true"/>
-    <arg name="depth_processing" value="true"/>
-    <arg name="depth_registered_processing" value="true"/>
-    <arg name="disparity_processing" value="true"/>
-    <arg name="disparity_registered_processing" value="true"/>
   </include>
-  
+    
   <group if="$(arg scan_processing)">
     <node pkg="nodelet" type="nodelet" name="depthimage_to_laserscan" args="load depthimage_to_laserscan/DepthImageToLaserScanNodelet $(arg camera)/$(arg camera)_nodelet_manager">
       <param name="scan_height" value="10"/>
