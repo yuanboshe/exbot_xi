@@ -1,0 +1,6 @@
+<launch>
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/nav.rviz" required="true" />
+  
+  <!-- add interactive_marker -->
+  <include file="$(find exbotxi_rviz)/launch/includes/interactive_marker.launch.xml" />
+</launch>
