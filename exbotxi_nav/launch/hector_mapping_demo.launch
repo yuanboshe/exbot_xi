@@ -1,0 +1,4 @@
+<launch>
+  <include file="$(find exbotxi_nav)/launch/includes/hector_mapping.launch.xml"/>
+  <include file="$(find exbotxi_nav)/launch/includes/move_base.launch.xml"/>
+</launch>
