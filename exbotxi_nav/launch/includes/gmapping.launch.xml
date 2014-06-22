@@ -4,10 +4,10 @@
 
   <node pkg="gmapping" type="slam_gmapping" name="slam_gmapping" output="screen">
     <param name="odom_frame" value="odom"/>
-    <param name="map_update_interval" value="30.0"/>
+    <param name="map_update_interval" value="0.5"/>
     <!-- Set maxUrange < actual maximum range of the Laser -->
-    <param name="maxRange" value="5.0"/>
-    <param name="maxUrange" value="4.5"/>
+    <param name="maxRange" value="6.5"/>
+    <param name="maxUrange" value="6.0"/>
     <param name="sigma" value="0.05"/>
     <param name="kernelSize" value="1"/>
     <param name="lstep" value="0.05"/>
@@ -43,5 +43,8 @@
     <param name="lasamplerange" value="0.005"/>
     <param name="lasamplestep" value="0.005"/>
     <remap from="scan" to="$(arg scan_topic)"/>
+    
+    <param name="throttle_scans" value="0"/>
+    
   </node>
 </launch>
