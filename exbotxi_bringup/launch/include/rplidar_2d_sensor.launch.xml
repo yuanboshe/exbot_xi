@@ -3,7 +3,7 @@
     <param name="com_path" type="string" value="/dev/ttyUSB1" />
     <param name="com_baudrate" type="int" value="115200" />
     <param name="frame_id" type="string" value="base_frame" />
-    <param name="range_min" type="double" value="0.0" />
-    <param name="range_max" type="double" value="13.0" />
+    <param name="range_min" type="double" value="0.16" />
+    <param name="range_max" type="double" value="6.0" />
   </node>
 </launch>
