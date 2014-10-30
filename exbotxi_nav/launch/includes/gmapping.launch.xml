@@ -43,8 +43,5 @@
     <param name="lasamplerange" value="0.005"/>
     <param name="lasamplestep" value="0.005"/>
     <remap from="scan" to="$(arg scan_topic)"/>
-    
-    <param name="throttle_scans" value="0"/>
-    
   </node>
 </launch>
