@@ -1,4 +1,8 @@
 <launch>
-  <include file="$(find exbotxi_nav)/launch/includes/gmapping.launch.xml"/>
-  <include file="$(find exbotxi_nav)/launch/includes/move_base.launch.xml"/>
+  <arg name="move_base_group" default="turtlebot" />
+  <include file="$(find exbotxi_nav)/launch/includes/gmapping.launch.xml" />
+  <include file="$(find exbotxi_nav)/launch/includes/move_base.launch.xml">
+    <arg name="move_base_group" value="$(arg move_base_group)"/>
+  </include>
+  
 </launch>

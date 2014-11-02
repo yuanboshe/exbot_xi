@@ -1,20 +1,23 @@
 <launch>
   <param name="/use_sim_time" value="false"/>
   
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find exbotxi_description)/urdf/exbotxi.urdf.xacro'" />
-  <param name="robot_description" command="$(arg urdf_file)" />
+  <arg name="mobile_base" default="$(optenv MOBILE_BASE create)"/>
+  
+  <include file="$(find exbotxi_description)/launch/robot_description.launch.xml">
+    <arg name="mobile_base" value="$(arg mobile_base)" />
+  </include>
   
   <node name="arbotix" pkg="arbotix_python" type="arbotix_driver" output="screen">
     <rosparam command="delete" param="/arbotix" />
-    <rosparam file="$(find exbotxi_bringup)/config/fake_irobot_create_arbotix.yaml" command="load" />
+    <rosparam file="$(find exbotxi_bringup)/config/fake_exbotxi_arbotix.yaml" command="load" />
     <param name="sim" value="true"/>
-    <remap from="cmd_vel" to="mobile_base/commands/velocity"/>
+    <remap from="cmd_vel" to="base_cmd_vel"/>
   </node>
   
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
-    <param name="publish_frequency" type="double" value="8.0" />
+  <!-- velocity commands multiplexer -->
+  <node pkg="nodelet" type="nodelet" name="mobile_base_nodelet_manager" args="manager"/>
+  <node pkg="nodelet" type="nodelet" name="cmd_vel_mux" args="load yocs_cmd_vel_mux/CmdVelMuxNodelet mobile_base_nodelet_manager">
+    <param name="yaml_cfg_file" value="$(find exbotxi_bringup)/param/mux.yaml"/>
+    <remap from="cmd_vel_mux/output" to="base_cmd_vel"/>
   </node>
-  
-  <node pkg="topic_tools" type="mux" name="exbotxi_mux1" args="mobile_base/commands/velocity cmd_vel_mux/input/teleop" />
-  <node pkg="topic_tools" type="mux" name="exbotxi_mux2" args="mobile_base/commands/velocity cmd_vel" />
 </launch>

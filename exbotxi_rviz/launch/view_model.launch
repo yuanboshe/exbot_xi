@@ -1,8 +1,9 @@
 <launch>
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find exbotxi_description)/urdf/exbotxi.urdf.xacro'" />
-  <param name="robot_description" command="$(arg urdf_file)" />
-  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher" />
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/model.rviz" required="true" />
-  <!--<node pkg="tf" type="static_transform_publisher" name="base_footprint_odom" args="0 0 0 0 0 0 /odom /base_footprint 100" /-->
+  <arg name="mobile_base" default="$(optenv MOBILE_BASE create)"/>
+  
+  <include file="$(find exbotxi_description)/launch/robot_description.launch.xml">
+    <arg name="mobile_base" value="$(arg mobile_base)" />
+  </include>
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exbotxi_rviz)/rviz/model.rviz" />
 </launch>

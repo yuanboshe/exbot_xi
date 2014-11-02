@@ -1,44 +1,18 @@
 <launch>
+  <arg name="mobile_base" default="$(optenv MOBILE_BASE create)"/>
+  <!-- create, kobuki -->
+  <arg name="base_port" default="$(optenv BASE_PORT /dev/ttyUSB0)"/>
+  <!-- /dev/ttyUSB0, /dev/ttyS0 -->
+  
   <param name="/use_sim_time" value="false"/>
   
+  <!-- mobile base setting -->
+  <include file="$(find exbotxi_bringup)/launch/includes/$(arg mobile_base)/mobile_base.launch.xml">
+    <arg name="base_port" value="$(arg base_port)" />
+  </include>
+  
   <!-- exbotxi_description -->
-  <arg name="urdf_file" default="$(find xacro)/xacro.py '$(find exbotxi_description)/urdf/exbotxi.urdf.xacro'" />
-  <param name="robot_description" command="$(arg urdf_file)" />
-  <node name="robot_state_publisher" pkg="robot_state_publisher" type="state_publisher">
-    <param name="publish_frequency" type="double" value="8.0" />
-  </node>
-  
-  <!-- irobot create driver -->
-  <node pkg="create_node" type="turtlebot_node.py" name="turtlebot_node" respawn="true" args="--respawnable">
-    <param name="bonus" value="false" />
-    <param name="update_rate" value="30.0" />
-    <param name="port" value="/dev/ttyUSB0" />
-    <param name="has_gyro" value="false" />
-    <remap from="cmd_vel" to="mobile_base/commands/velocity" />
-    <remap from="turtlebot_node/sensor_state" to="mobile_base/sensors/core" />
-    <remap from="imu/data" to="mobile_base/sensors/imu_data" />
-    <remap from="imu/raw" to="mobile_base/sensors/imu_data_raw" />
-  </node>
-  
-  <!-- diagnostics -->
-  <node pkg="diagnostic_aggregator" type="aggregator_node" name="diagnostic_aggregator" >
-    <rosparam command="load" file="$(find exbotxi_bringup)/config/diagnostics.yaml" />
-  </node>
-  
-  <!-- The odometry estimator -->
-  <node pkg="robot_pose_ekf" type="robot_pose_ekf" name="robot_pose_ekf">
-    <remap from="imu_data" to="mobile_base/sensors/imu_data"/>
-    <remap from="robot_pose_ekf/odom" to="odom_combined"/>
-    <param name="freq" value="10.0"/>
-    <param name="sensor_timeout" value="1.0"/>
-    <param name="publish_tf" value="true"/>
-    <param name="odom_used" value="true"/>
-    <param name="imu_used" value="true"/>
-    <param name="vo_used" value="false"/>
-    <param name="output_frame" value="odom"/>
-  </node>
-  
-  <!-- exbotxi mux for many input -->
-  <node pkg="topic_tools" type="mux" name="exbotxi_mux1" args="mobile_base/commands/velocity cmd_vel_mux/input/teleop" />
-  <node pkg="topic_tools" type="mux" name="exbotxi_mux2" args="mobile_base/commands/velocity cmd_vel" />
+  <include file="$(find exbotxi_description)/launch/robot_description.launch.xml">
+    <arg name="mobile_base" value="$(arg mobile_base)" />
+  </include>
 </launch>

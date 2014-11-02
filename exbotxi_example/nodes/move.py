@@ -35,7 +35,7 @@ from geometry_msgs.msg import Twist
 
 class Move():
     def __init__(self):
-        topic = "cmd_vel"
+        topic = "/cmd_vel"
         rospy.init_node('exbotxi_example_move')
         rospy.on_shutdown(self.shutdown)
         self.cmdVelPub = rospy.Publisher(topic, Twist)
