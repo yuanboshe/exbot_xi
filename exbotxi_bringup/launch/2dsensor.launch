@@ -1,6 +1,6 @@
 <launch>
   <arg name="2dsensor"  default="$(optenv SENSOR_2D rplidar)"/>
-  <!-- rplidar, hokuyo -->
+  <!-- rplidar, hokuyo, hokuyo_urg -->
   <arg name="use_filter" default="$(optenv USE_FILTER false)"/>
   
   <include file="$(find exbotxi_bringup)/launch/includes/$(arg 2dsensor)_2d_sensor.launch.xml">
