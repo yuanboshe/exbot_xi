@@ -9,6 +9,8 @@
     <param name="serial_port" type="string" value="$(arg serial_port)"/>
     <param name="frame_id" value="$(arg laser_frame)" />
     <param name="calibrate_time" value="false" />
+    <param name="angle_min" value="-1.7" />
+    <param name="angle_max" value="1.7" />
     <remap from="scan" to="$(arg scan_topic)"/>
   </node>
 </launch>
