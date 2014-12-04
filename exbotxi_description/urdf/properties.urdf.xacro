@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<robot>
+  <property name="laser_px" value="0.14" />
+  <property name="laser_py" value="0" />
+  <property name="laser_pz" value="0" />
+</robot>

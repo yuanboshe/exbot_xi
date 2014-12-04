@@ -101,10 +101,11 @@
   </link>
   
   <joint name="laser_joint" type="fixed">
-    <origin xyz="0 0 0.06" rpy="0 0 0"/>
+    <origin xyz="${laser_px} ${laser_py} ${laser_pz+0.06}" rpy="0 0 0"/>
     <parent link="plate0_link"/>
     <child link="laser_link"/>
   </joint>
+  
   <link name="laser_link">
     <inertial>
       <mass value="0.001"/>

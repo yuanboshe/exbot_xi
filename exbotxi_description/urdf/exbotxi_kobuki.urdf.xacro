@@ -7,6 +7,7 @@
   
   <xacro:include filename="$(find kobuki_description)/urdf/kobuki.urdf.xacro" />
   <kobuki/>
+  <xacro:include filename="$(find exbotxi_description)/urdf/properties.urdf.xacro" />
   <xacro:include filename="$(find exbotxi_description)/urdf/kobuki_frame.urdf.xacro"/>
   <xacro:include filename="$(find exbotxi_description)/urdf/xtion_pro.urdf.xacro"/>
 </robot>
