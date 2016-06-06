@@ -1,5 +1,11 @@
 exbot_xi
 ========
+
+*We ([AICRobo](http://www.aicrobo.com)) create this repository to help turtlebot users play autonomous mobile robot with ROS more easier.* **From 2013 to 2014. This repository ended it's life, the alternative repository you can view here [aicrobo_xi](https://github.com/aicrobo/aicrobo_xi)
+
+The Old Description
+--------------------
+
 Email: ex_bot@126.com  
 
 Mainly reference turtlebot and rbx1 packages, thanks to their contributions for ROS!
